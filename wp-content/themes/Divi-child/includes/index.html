@@ -1,0 +1,36 @@
+<header>
+    <div class="header full-width"> 
+		</p>
+        <div class="wrapper">
+            <div>
+				<div class="call-us">
+                    <span class="telephone-header">
+                        <a href="tel:<?php echo $phon_nu; ?>">
+                            <i class="fa fa-phone" aria-hidden="true"></i> <?php echo $phon_nu; ?>
+                        </a>
+                        </span>
+							<a class="request-a-quote" href="#">REQUEST A QUOTE</a>
+                        <span class="top_popup_btn mobile_btn"><?php echo do_shortcode('[popup_anything id="159"]'); ?></span>
+                </div>
+				<?php if (!empty($evan_options['site_logo'])) { ?>
+                    <div class="logo">
+                        <a href="<?php echo esc_url(home_url('/')); ?>">
+                            <img src="<?php echo $site_logo; ?>" alt="Home">
+                        </a>
+                    </div>
+                <?php } ?>
+			</div>
+			</div>
+            <div class="header-main full-width">
+                <div class="navigation-right">
+                    
+                    <i class="fa fa-bars toggle" aria-hidden="true"></i>
+                    <div class="navigation">
+                        <?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => '', 'container' => false)); ?>
+                        <span class="top_popup_btn desktop_btn"><?php echo do_shortcode('[popup_anything id="159"]'); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
