@@ -34,6 +34,22 @@ function divi_custom_blog_class($classlist)
 
 add_filter('et_module_classes', 'divi_custom_blog_class');
 
+// Enqueue admin JS only on Authors taxonomy admin page
+add_action('admin_enqueue_scripts', function ($hook) {
+	global $pagenow;
+	$screen = get_current_screen();
+	$taxonomy = isset($_GET['taxonomy']) ? sanitize_key($_GET['taxonomy']) : ($screen ? $screen->taxonomy : '');
+	if ($pagenow === 'edit-tags.php' && $taxonomy === 'author') {
+		wp_enqueue_script(
+			'crianzareverente-admin-authors',
+			get_stylesheet_directory_uri() . '/assets/js/admin-authors.js',
+			['jquery'],
+			wp_get_theme()->get('Version'),
+			true
+		);
+	}
+});
+
 
 
 

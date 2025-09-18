@@ -999,15 +999,34 @@ jQuery(document).ready(function ($) {
 
         $form.find('.spinner').addClass('is-active');
 
-        $.post(ajaxurl, data, function (response) {
+        var request = $.post(ajaxurl, data, function (response) {
             $form.find('.spinner').removeClass('is-active');
-            if (response.author_slug) {
+            try {
+                if (typeof response === 'string') {
+                    response = JSON.parse(response);
+                }
+            } catch (e) {
+                // ignore and fallback to submission below
+            }
+            if (response && response.author_slug) {
                 $('input[name="slug"]').val(response.author_slug);
-                $('body.taxonomy-author form#addtag #submit').trigger('click');
-            } else {
+            }
+            $('body.taxonomy-author form#addtag #submit').trigger('click');
+        });
+
+        // Ensure form submission even if the AJAX request fails
+        request.fail(function () {
+            $form.find('.spinner').removeClass('is-active');
+            $('body.taxonomy-author form#addtag #submit').trigger('click');
+        });
+
+        // Absolute safety net: submit after timeout if neither success nor fail handlers ran
+        setTimeout(function(){
+            if ($form.find('.spinner').hasClass('is-active')) {
+                $form.find('.spinner').removeClass('is-active');
                 $('body.taxonomy-author form#addtag #submit').trigger('click');
             }
-        });
+        }, 5000);
 
     });
 

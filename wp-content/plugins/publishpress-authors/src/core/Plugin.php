@@ -1463,7 +1463,8 @@ class Plugin
             }
 
             $query->query_vars['meta_query'] = $meta_query;
-            $query->query_vars['custom_term_search'] = $search;
+            // Flag used by include_term_name_in_search() to also search the term name
+            $query->query_vars['custom_author_search'] = $search;
 
             unset($query->query_vars['search']);
         }
