@@ -1,3 +1,4 @@
+// Improve admin search for Authors taxonomy: ensure display name (term name) is considered
 (function ($) {
     $(function () {
         var $input = $('#tag-search-input');
